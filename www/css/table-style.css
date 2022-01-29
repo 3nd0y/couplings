@@ -1,0 +1,25 @@
+div.margin-page {
+	/*padding: 10px;*/
+}
+
+tr {
+   line-height: 13px;
+   min-height: 20px;
+   height: 20px;
+}
+
+th.text-center.ribbon {
+	/*background-color: rgb(0,51,102);*/
+	color:  white;
+	background-image: url("../imgs/blue.png");
+}
+
+th.text-center.cover-info {
+	border: 3px solid black;
+}
+
+@media print {
+	th.text-center.ribbon {
+		box-shadow: 0 0 0 1000px rgb(0,51,102) inset;
+	}
+}

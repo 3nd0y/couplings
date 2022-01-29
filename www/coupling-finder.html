@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Coupling Finder</title>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.5.0/papaparse.min.js"></script> -->
+	<script src="js/jquery.min.js"></script>
+	<script>document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')</script>
+</head>
+<body>
+	<div class="stack">
+		<select id="esp_upper">
+			<option value="u_pump">Pump</option>
+			<!-- <option value="u_agh">AGH/MGH</option>
+			<option value="u_intake">Intake</option>
+			<option value="u_protector">Protector</option>
+			<option value="u_motor">Motor</option> -->
+		</select>
+		<select id="series_upper">
+			<option id="series_u_blank"></option>
+			<option value="338">338</option>
+			<option value="338 Ext Sft ">338 Extended Shaft</option>
+			<option value="387">387</option>
+			<option value="387 Ext Sft ">387 Extended Shaft</option>
+			<option value="400">400</option>
+			<option value="400 Ext Sft ">400 Extended Shaft</option>
+			<option value="450">450</option>
+			<option value="538/540">538/540</option>
+			<option value="540">540</option>
+			<option value="562">562</option>
+			<option value="675">675</option>
+			<option value="725">725</option>
+			<option value="862">862</option>
+			<option value="950">950</option>
+			<option value="1000">1000</option>
+		</select>
+		<!-- <select id="type_upper">
+			<option value="u_nonfs">Non Factory Shimming</option>
+			<option value="u_fs">Factory Shimming</option>
+			<option value="u_extshft">Extended Shaft</option>
+		</select> -->
+		<select id="shft_upper">
+			<option value="0.62">0.62</option>
+			<option value="0.68">0.68</option>
+			<option value="0.87">0.87</option>
+			<option value="1">1</option>
+			<option value="1.18">1.18</option>
+		</select>
+		<span>X</span>
+		<select id="esp_bottom">
+			<option value="b_pump">Pump</option>
+			<!-- <option value="b_agh">AGH/MGH</option>
+			<option value="b_intake">Intake</option>
+			<option value="b_protector">Protector</option>
+			<option value="b_motor">Motor</option> -->
+		</select>
+		<select id="series_bottom">
+			<option id="series_u_blank"></option>
+			<option value="338">338</option>
+			<option value="338 Ext Hd ">338 Extended Head</option>
+			<option value="387">387</option>
+			<option value="387 Ext Hd ">387 Extended Head</option>
+			<option value="400">400</option>
+			<option value="400 Ext Hd ">400 Extended Head</option>
+			<option value="450">450</option>
+			<option value="538/540">538/540</option>
+			<option value="540">540</option>
+			<option value="562">562</option>
+			<option value="675">675</option>
+			<option value="725">725</option>
+			<option value="862">862</option>
+			<option value="950">950</option>
+			<option value="1000">1000</option>
+		</select>
+		<!-- <select id="type_bottom">
+			<option value="b_nonfs">Non Factory Shimming</option>
+			<option value="b_fs">Factory Shimming</option>
+			<option value="b_exthd">Extended Head</option>
+		</select> -->
+		<select id="shft_bottom">
+			<option value="0.62">0.62</option>
+			<option value="0.68">0.68</option>
+			<option value="0.87">0.87</option>
+			<option value="1">1</option>
+			<option value="1.18">1.18</option>
+		</select>
+	</div>
+	<div>
+		<div>&nbsp;</div>
+		<div>
+			<button onclick="search();">Search</button>
+		</div>
+		<div>
+			<p> Result: </p>
+			<p id="result"></p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function search() {
+			const socket = new WebSocket('ws://localhost:8081');
+			var jsonws = {};
+			// clear Element
+			document.getElementById('result').innerHTML = '';
+
+			jsonws.esp_upper = document.getElementById('esp_upper').value;
+			jsonws.series_upper = document.getElementById('series_upper').value;
+			// jsonws.type_upper = document.getElementById('type_upper').value;
+			jsonws.shft_upper = document.getElementById('shft_upper').value;
+			jsonws.esp_bottom = document.getElementById('esp_bottom').value;
+			jsonws.series_bottom = document.getElementById('series_bottom').value;
+			// jsonws.type_bottom = document.getElementById('type_bottom').value;
+			jsonws.shft_bottom = document.getElementById('shft_bottom').value;
+			sendjson = JSON.stringify(JSON.stringify(jsonws));
+			
+			// Connection opened
+			socket.addEventListener('open', function (event) {
+			    socket.send(sendjson);
+			});
+
+			// Listen for messages
+			socket.addEventListener('message', function (event) {
+			    console.log('Message from server ', event.data);
+			    document.getElementById('result').innerHTML = event.data;
+			});			
+		}
+
+		// delete shaft size element child
+		function clear_shft() {
+			try {
+				const shft_upper_id = document.getElementById('shft_upper');
+				const shft_bottom_id = document.getElementById('shft_bottom');
+				while(shft_upper_id.childNodes.length >=1) {
+					shft_upper_id.removeChild(shft_upper_id.firstChild);
+					shft_bottom_id.removeChild(shft_bottom_id.firstChild);
+				}
+			} catch (err) {console.log('Error ${err}');}
+		}
+
+		const u338 = ['0.62','0.68'];
+		const u338ext = ['0.68'];
+
+		// add child series
+		function insert_opt(a) {
+			var shft = document.getElementById('shft_upper');
+			for(i in a) {
+				opt = document.createElement('option');
+				opt.value = a[i];
+				opt.innerHTML = a[i];
+				console.log(opt);
+				shft.appendChild(opt);
+			}
+		}
+
+		// onchange
+		function select_series() {
+			var series = document.getElementById('series_upper');
+			var shft = document.getElementById('shft_upper');
+			var opt;
+			
+			clear_shft();
+			switch (series.value) {
+				case '338':
+					insert_opt(u338);
+					break;
+				case '400':
+					insert_opt(u338);
+					break;
+				case 338:
+					// statements_1
+					break;
+				default:
+					// statements_def
+					break;
+			}
+		}
+	</script>
+</body>
+</html>

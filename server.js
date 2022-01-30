@@ -25,7 +25,6 @@ const wss = new WebSocketServer({port:8081});
  *****************/
 const __dirname = path.resolve();
 
-
 app.use(express.static(path.join(__dirname, 'www')));
 console.log(path.join(__dirname, 'www'));
 // app.use(express.static('www'));
@@ -38,25 +37,10 @@ app.get('/coupling', function(req, res){
   res.sendFile(path.join(__dirname, 'www/coupling-finder.html'));
 });
 
-function find_cpl(ps, sd, ps2, sd2) {
-  fs.createReadStream('data/extract_Table_connection.csv')
-    .pipe(csv(['ps','sd','ps2','sd2','osize','oaflas','ohsn','cpl','css','cslw','ms','mlw','sw','trq']))
-    .on('data', (row) => {
-      console.log(row.ps,':',row.ps2,':');
-    if(row.ps==ps && row.sd==sd && row.ps2==ps2 && row.sd2==sd2) {
-      console.log('Need coupling:\n' + row.cpl);
-    }
-    })
-    .on('end', () => {
-      console.log('CSV file successfully processed');
-    });  
-}
-
 wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
     // console.log('received: %s', data);
     var dataj = JSON.parse(JSON.parse(data));
-    // console.log("String: " + dataj.esp_upper);
 
     fs.createReadStream('data/extract_Table_connection.csv')
       .pipe(csv(['ps','sd','ps2','sd2','osize','oaflas','ohsn','cpl','css','cslw','ms','mlw','sw','trq']))
@@ -70,8 +54,6 @@ wss.on('connection', function connection(ws) {
       .on('end', () => {
         console.log('CSV file successfully processed');
       });  
-
-  });
 
 });
 

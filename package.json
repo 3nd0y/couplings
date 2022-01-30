@@ -1,7 +1,7 @@
 {
   "name": "SLB-Report",
   "version": "1.0.0",
-  "engines":"17.x",
+  "engines": "17.x",
   "description": "",
   "main": "server.js",
   "type": "module",
@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ws": "^8.4.2",
-    "express":"4.17.2"
+    "csv-parse": "^5.0.4",
+    "express": "4.17.2",
+    "ws": "^8.4.2"
   }
 }

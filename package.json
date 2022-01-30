@@ -1,15 +1,15 @@
 {
   "name": "SLB-Report",
   "version": "1.0.0",
-  "engines": "12.21.0",
-  "description": "",
+  "engines": "12.x",
+  "description": "Whatever",
   "main": "server.js",
-  "type": "module",
   "scripts": {
+    "start":"node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "3nd0y",
   "license": "ISC",
   "dependencies": {
     "csv-parse": "^5.0.4",

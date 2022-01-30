@@ -1,9 +1,17 @@
+/*
 import express from 'express';
-var app = express();
 import path from 'path';
 import csv from 'csv-parser';
 import fs from 'fs';
 import {WebSocketServer} from 'ws';
+*/
+const express = require('express');
+const path = require('path');
+const csv = require('csv-parser');
+const fs = require('fs');
+const {WebSocketServer} = require('ws');
+
+var app = express();
 const wss = new WebSocketServer({port:8081});
 // const ws = new WebSocket({port:8080});
 
@@ -23,7 +31,7 @@ const wss = new WebSocketServer({port:8081});
  sw   = Size in Wrench
  trq  = Torque Setting with Adapter Wrench (lbf-ft)
  *****************/
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 
 app.use(express.static(path.join(__dirname, 'www')));
@@ -54,7 +62,7 @@ function find_cpl(ps, sd, ps2, sd2) {
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
-    // console.log('received: %s', data);
+    console.log('received: %s', data);
     var dataj = JSON.parse(JSON.parse(data));
     // console.log("String: " + dataj.esp_upper);
 

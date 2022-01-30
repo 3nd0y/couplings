@@ -1,7 +1,7 @@
 {
   "name": "SLB-Report",
   "version": "1.0.0",
-  "engines": "17.x",
+  "engines": "17.4.0",
   "description": "",
   "main": "server.js",
   "type": "module",

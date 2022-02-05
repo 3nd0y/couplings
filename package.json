@@ -1,15 +1,14 @@
 {
   "name": "SLB-Report",
   "version": "1.0.0",
-  "engines": "16.x",
   "description": "",
   "main": "index.js",
   "type": "module",
-  "engines": "12.x",
-  "description": "Whatever",
+  "engines": "17.x",
+  "description": "Web apps to check coupling ESP",
   "main": "index.js",
   "scripts": {
-    "start":"node server.js",
+    "start":"node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

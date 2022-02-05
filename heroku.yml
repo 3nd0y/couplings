@@ -1,0 +1,10 @@
+setup:
+    addons:
+build:
+    docker:
+        web:
+release:
+    image: web
+    command:
+run:
+    web: npm index.js

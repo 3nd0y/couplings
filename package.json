@@ -5,11 +5,15 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "engines": "12.x",
+  "description": "Whatever",
+  "main": "index.js",
   "scripts": {
+    "start":"node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "3nd0y",
   "license": "ISC",
   "dependencies": {
     "@vercel/node": "^1.12.1",

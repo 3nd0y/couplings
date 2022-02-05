@@ -15,7 +15,6 @@
   "author": "3nd0y",
   "license": "ISC",
   "dependencies": {
-    "@vercel/node": "^1.12.1",
     "csv-parse": "^5.0.4",
     "express": "4.17.2",
     "ws": "^8.4.2"

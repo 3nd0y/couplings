@@ -3,9 +3,13 @@ var app = express();
 import path from 'path';
 import csv from 'csv-parser';
 import fs from 'fs';
-import {WebSocketServer} from 'ws';
-const wss = new WebSocketServer({port:8081});
-// const ws = new WebSocket({port:8080});
+import * as http from 'http';
+import * as WebSocket from 'ws';
+
+//initialize a simple http server
+const server = http.createServer(app);
+//initialize the WebSocket server instance
+const wss = new WebSocket.Server({ server });
 
 /*****************
  ps   = Pump Series Upper
@@ -75,7 +79,7 @@ wss.on('connection', function connection(ws) {
 
 });
 
-var server = app.listen(process.env.PORT || 8080, function(){
+server.listen(process.env.PORT || 8080, function(){
   console.log('Server listening on port 8080');
 });
 

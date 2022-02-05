@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "engines": "17.x",
+  "engines": {
+    "node":"17.x"
+  },
   "description": "Web apps to check coupling ESP",
   "main": "index.js",
   "scripts": {
@@ -18,5 +20,9 @@
     "csv-parse": "^5.0.4",
     "express": "4.17.2",
     "ws": "^8.4.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3nd0y/couplings"
+  },
 }

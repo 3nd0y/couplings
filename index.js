@@ -46,7 +46,7 @@ const httpserver = app.listen(process.env.PORT || 8080, function(){
 
 //initialize the WebSocket server instance
 const wss = new WebSocketServer({ 
-	port: 8081
+	port: 443
 });
 
 wss.on('connection', function connection(ws) {

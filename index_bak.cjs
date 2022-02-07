@@ -1,10 +1,8 @@
-import express from 'express';
-var app = express();
-import path from 'path';
-import {parse} from 'csv-parse';
-import fs from 'fs';
-import * as http from 'http';
-import { WebSocketServer } from 'ws';
+const express = require('express');
+const path = require('path');
+const {parse} = require('csv-parse');
+const fs = require('fs');
+const { Server } = require('ws');
 
 //initialize a simple http server
 // const server = http.createServer(app);
@@ -26,27 +24,21 @@ import { WebSocketServer } from 'ws';
  sw   = Size in Wrench
  trq  = Torque Setting with Adapter Wrench (lbf-ft)
  *****************/
-const __dirname = path.resolve();
-
-
-app.use(express.static(path.join(__dirname, 'www')));
-console.log(path.join(__dirname, 'www'));
-// app.use(express.static('www'));
-
-app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, 'www/index.html'));
-});
-app.get('/coupling', function(req, res){
-  res.sendFile(path.join(__dirname, 'www/coupling-finder.html'));
-});
-
-const httpserver = app.listen(process.env.PORT || 8080, function(){
-  console.log('Server listening on port 8080');
-});
+const app = express()
+          .use(express.static(path.join(__dirname, 'www')))
+          .get('/', function(req, res){
+            res.sendFile(path.join(__dirname, 'www/index.html'));
+          })
+          .get('/coupling', function(req, res){
+            res.sendFile(path.join(__dirname, 'www/coupling-finder.html'));
+          })
+          .listen(process.env.PORT || 8080, function(){
+            console.log('Server listening on port 8080');
+          });
 
 //initialize the WebSocket server instance
 const wss = new WebSocketServer({ 
-	port: 443
+	app
 });
 
 wss.on('connection', function connection(ws) {

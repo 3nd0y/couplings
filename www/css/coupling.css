@@ -1,41 +1,44 @@
 html,
 body {
-  height: 100%;
-  background-color: lightgrey;
+    height: 100%;
+    background-color: lightgrey;
 }
 
 .icon-radius {
-	border-top-left-radius: 30px;
-	border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 
 h1 {
-	font-family: sans-serif;
-	font-weight: bold;
+    font-family: sans-serif;
+    font-weight: bold;
 
 }
 
 .container-rad {
-	border-radius: 30px;
+    border-radius: 30px;
 
-	background-color: rgb(0,56,115);
+    background-color: rgb(0, 56, 115);
 }
 
 .img-bg {
-	background-color: white;
-}
+    background-color: white;
 }
 
+
 .title-app {
-	background-color: white;
-	height: 100px;
+    background-color: white;
+    height: 100px;
 }
 
 .img-center {
-	margin-top: 37%;
+    margin-top: 37%;
 }
 
+.btn-color {}
+
 .btn-color:hover {
-	background-color: white;
-	color: rgb(0,56,115);
+    color: rgb(12,14,14);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+    transition: all 0.2s ease-in-out;
 }

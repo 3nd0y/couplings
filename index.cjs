@@ -24,10 +24,7 @@ const wss = new Server({ server });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
     var dataj = JSON.parse(JSON.parse(data));
-    // console.log("String: " + dataj.esp_upper);
-
     fs.createReadStream('data/extract_Table_connection.csv')
       .pipe(csv(['ps','sd','ps2','sd2','osize','oaflas','ohsn','cpl','css','cslw','ms','mlw','sw','trq']))
       .on('data', (row) => {

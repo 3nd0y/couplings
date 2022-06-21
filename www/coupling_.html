@@ -206,69 +206,43 @@
             console.log('Message from server ', event.data);
             document.getElementById('result-coupling').innerHTML = event.data;
         });
-
-        // clear form
-        clear_series_upper();
-        clear_series_bottom();
     }
 
     // delete shaft size element child
     function clear_series_upper() {
         try {
             const series_upper_id = document.getElementById('series_upper');
-            const shaft_upper_id = document.getElementById('shft_upper')
             while (series_upper_id.hasChildNodes()){
                 series_upper_id.removeChild(series_upper_id.firstChild);
-            }
-            while (shaft_upper_id.hasChildNodes()){
-                shaft_upper_id.removeChild(shaft_upper_id.firstChild);
             }
         } catch (err) { console.log('Error: ' + err); }
     }
     function clear_series_bottom() {
         try {
             const series_bottom_id = document.getElementById('series_bottom');
-            const shaft_bottom_id = document.getElementById('shft_bottom')
             while (series_bottom_id.hasChildNodes()){
                 series_bottom_id.removeChild(series_bottom_id.firstChild);
-            }
-            while (shaft_bottom_id.hasChildNodes()){
-                shaft_bottom_id.removeChild(shaft_bottom_id.firstChild);
             }
         } catch (err) { console.log('Error: ' + err); }
     }
 
     // add child series
-    function insert_opt_upper(a,b) {
+    function insert_opt_upper(a) {
         var elem = document.getElementById('series_upper');
-        var elem2= document.getElementById('shft_upper');
         for (i in a) {
             option = document.createElement('option');
             option.text = a[i];
             option.value = a[i];
             elem.add(option);
-        }
-        for (i in b) {
-            option = document.createElement('option');
-            option.text = b[i];
-            option.value = b[i];
-            elem2.add(option);
         }
     }
-    function insert_opt_bottom(a,b) {
+    function insert_opt_bottom(a) {
         var elem = document.getElementById('series_bottom');
-        var elem2= document.getElementById('shft_bottom');
         for (i in a) {
             option = document.createElement('option');
             option.text = a[i];
             option.value = a[i];
             elem.add(option);
-        }
-        for (i in b) {
-            option = document.createElement('option');
-            option.text = b[i];
-            option.value = b[i];
-            elem2.add(option);
         }
     }
 
@@ -278,53 +252,51 @@
         var series = document.getElementById('esp_upper');
         console.log(series.value);
         clear_series_upper();
-        clear_series_bottom();
+        switch (series.value) {
+            case 'u_pump':
+                insert_opt_upper(pump_u);
+                break;
+            case 'u_agh':
+                insert_opt_upper(aghmgh_u);
+                break;
+            case 'u_intake':
+                insert_opt_upper(intake_u);
+                break;
+            case 'u_protector':
+                // statements_1
+                break;
+            case 'u_motor':
+                // statements_1
+                break;    
+            default:
+                // statements_def
+                break;
+        }
     }
     function select_series_bottom() {
-        var seriesu = document.getElementById('esp_upper');
-        var seriesb = document.getElementById('esp_bottom');
-        console.log(seriesu.value+' and '+seriesb.value);
+        var series = document.getElementById('esp_bottom');
+        console.log(series.value);
         clear_series_bottom();
-        if(seriesu.value=='u_pump' && seriesb.value=='b_pump') {
-            insert_opt_upper(pump__pump.ps,pump__pump.sd);
-            insert_opt_bottom(pump__pump.ps2,pump__pump.sd2);
-        } else if (seriesu.value=='u_pump' && seriesb.value=='b_agh') {
-            insert_opt_upper(pump__agh_mgh.ps,pump__agh_mgh.sd);
-            insert_opt_bottom(pump__agh_mgh.ps2,pump__agh_mgh.sd2);
-        } else if (seriesu.value=='u_agh' && seriesb.value=='b_intake') {
-            insert_opt_upper(agh_mgh__intake.ps,agh_mgh__intake.sd);
-            insert_opt_bottom(agh_mgh__intake.ps2,agh_mgh__intake.sd2);
-        } else if ((seriesu.value=='u_pump' && seriesb.value=='b_protector')||(seriesu.value=='u_agh' && seriesb.value=='b_protector')) {
-            insert_opt_upper(pump_agh__protector.ps,pump_agh__protector.sd);
-            insert_opt_bottom(pump_agh__protector.ps2,pump_agh__protector.sd2);
-        } else if (seriesu.value=='u_pump' && seriesb.value=='b_intake') {
-            insert_opt_upper(pump__intake.ps,pump__intake.sd);
-            insert_opt_bottom(pump__intake.ps2,pump__intake.sd2);
-        } else if (seriesu.value=='u_intake' && seriesb.value=='b_protector') {
-            insert_opt_upper(intake__protector.ps,intake__protector.sd);
-            insert_opt_bottom(intake__protector.ps2,intake__protector.sd2);
-        } else if (seriesu.value=='u_protector' && seriesb.value=='b_protector') {
-            insert_opt_upper(protector__protector.ps,protector__protector.sd);
-            insert_opt_bottom(protector__protector.ps2,protector__protector.sd2);
-        } else if (seriesu.value=='u_protector' && seriesb.value=='b_motor') {
-            insert_opt_upper(protector__motor.ps,protector__motor.sd);
-            insert_opt_bottom(protector__motor.ps2,protector__motor.sd2);
-        } else if (seriesu.value=='u_motor' && seriesb.value=='b_motor') {
-            insert_opt_upper(motor__motor.ps,motor__motor.sd);
-            insert_opt_bottom(motor__motor.ps2,motor__motor.sd2);
-        } else if (seriesu.value=='u_maxProtector' && seriesb.value=='b_maxProtector') {
-            insert_opt_upper(maxProtector__maxProtector_promotor.ps,maxProtector__maxProtector_promotor.sd);
-            insert_opt_bottom(maxProtector__maxProtector_promotor.ps2,maxProtector__maxProtector_promotor.sd2);
-        } else if ((seriesu.value=='u_maxProtector' && seriesb.value=='b_maxProtector')||(seriesu.value=='u_maxProtector' && seriesb.value=='b_motor')) {
-            insert_opt_upper(maxProtector__std_motor_dominator_max_motor.ps,maxProtector__std_motor_dominator_max_motor.sd);
-            insert_opt_bottom(maxProtector__std_motor_dominator_max_motor.ps2,maxProtector__std_motor_dominator_max_motor.sd2);
-        } else if (seriesu.value=='u_maxMotor' && seriesb.value=='u_maxMotor') {
-            insert_opt_upper(maxUT_motor_promotor__maxCT_LT_motor.ps,maxUT_motor_promotor__maxCT_LT_motor.sd);
-            insert_opt_bottom(maxUT_motor_promotor__maxCT_LT_motor.ps2,maxUT_motor_promotor__maxCT_LT_motor.sd2);
-        } else if ((seriesu.value=='u_pump' && seriesb.value=='b_maxProtector')||(seriesu.value=='u_agh' && seriesb.value=='b_maxProtector')||(seriesu.value=='u_intake' && seriesb.value=='b_maxProtector')) {
-            insert_opt_upper(mgh_agh_intake_pump_LT__Max_prot_promotor.ps,mgh_agh_intake_pump_LT__Max_prot_promotor.sd);
-            insert_opt_bottom(mgh_agh_intake_pump_LT__Max_prot_promotor.ps2,mgh_agh_intake_pump_LT__Max_prot_promotor.sd2);
-        } 
+        switch (series.value) {
+            case 'b_pump':
+                insert_opt_bottom(pump_b);
+                break;
+            case 'b_agh':
+                insert_opt_bottom(aghmgh_b);
+                break;
+            case 'b_intake':
+                insert_opt_bottom(intake_b);
+                break;
+            case 'b_protector':
+                // statements_1
+                break;
+            case 'b_motor':
+                // statements_1
+                break;    
+            default:
+                // statements_def
+                break;
+        }
     }
 
     // Select tage onFocus
@@ -332,7 +304,6 @@
         document.getElementById('series_upper').value = '';
         document.getElementById('shft_upper').value = '';
     }
-
     function clear_form_bottom() {
         document.getElementById('series_bottom').value = '';
         document.getElementById('shft_bottom').value = '';

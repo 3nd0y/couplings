@@ -1,5 +1,6 @@
 const pump__pump = {
     ps: [
+        '',
         '338',
         '338 Ext Sft ',
         '338 Ext Sft (FS) ',
@@ -26,6 +27,7 @@ const pump__pump = {
         '1000'
     ],
     ps2: [ //pump b
+        '',
         '338',
         '338 Ext Hd ',
         '338 Ext Hd (FS) ',
@@ -62,6 +64,7 @@ const pump__pump = {
         '1000/738 '
     ],
     sd: [ //sd u
+        '',
         '0.44 H ',
         '0.62',
         '0.68',
@@ -74,6 +77,7 @@ const pump__pump = {
         '1.75'
     ],
     sd2: [ //sd b
+        '',
         '0.44H ',
         '0.62',
         '0.68',
@@ -89,6 +93,7 @@ const pump__pump = {
 
 const pump__agh_mgh = {
     ps: [
+        '',
         '338 (FS) ',
         '338',
         '338 Ext Sft (FS) ',
@@ -113,6 +118,7 @@ const pump__agh_mgh = {
         '862'
     ],
     ps2: [
+        '',
         '338 AGH Ext Hd (FS) ',
         '387 Adapter to AGH ',
         '387 Adapter to AGH',
@@ -154,6 +160,7 @@ const pump__agh_mgh = {
         '862/738 MGH'
     ],
     sd: [
+        '',
         '0.62',
         '0.68',
         '0.87',
@@ -162,6 +169,7 @@ const pump__agh_mgh = {
         '1.37'
     ],
     sd2: [
+        '',
         '0.68',
         '0.87',
         '1',
@@ -174,6 +182,7 @@ const pump__agh_mgh = {
 
 const agh_mgh__intake = {
     ps: [
+        '',
         '338 Ext Sft (FS) ',
         '387',
         '387 (FS) ',
@@ -191,6 +200,7 @@ const agh_mgh__intake = {
         '675/562/540 '
     ],
     ps2: [
+        '',
         '338 (FS) ',
         '338',
         '387',
@@ -214,12 +224,14 @@ const agh_mgh__intake = {
         '538/540  '
     ],
     sd: [
+        '',
         '0.68',
         '0.87',
         '1',
         '1.18'
     ],
     sd2: [
+        '',
         '0.68',
         '0.87',
         '1.18'
@@ -229,6 +241,7 @@ const agh_mgh__intake = {
 
 const pump_agh__protector = {
     ps: [
+        '',
         '338',
         '338 (FS) ',
         '338',
@@ -240,16 +253,19 @@ const pump_agh__protector = {
         '400/375 '
     ],
     ps2: [
+        '',
         '325/375 ',
         '387',
         '387 (FS) ',
         '400'
     ],
     sd: [
+        '',
         '0.68',
         '0.87'
     ],
     sd2: [
+        '',
         '0.75',
         '0.87'
     ]
@@ -257,6 +273,7 @@ const pump_agh__protector = {
 
 const pump__intake = {
     ps: [
+        '',
         '338',
         '338 Ext Sft ',
         '338 Ext Sft (FS) ',
@@ -278,6 +295,7 @@ const pump__intake = {
         '862'
     ],
     ps2: [
+        '',
         '338/375 ',
         '338/375 (FS) ',
         '387 Adapter to Intake or GS ',
@@ -314,6 +332,7 @@ const pump__intake = {
         '675/738 (FS) '
     ],
     sd: [
+        '',
         '0.44 H',
         '0.62',
         '0.68',
@@ -323,6 +342,7 @@ const pump__intake = {
         '1.37'
     ],
     sd2: [
+        '',
         '0.68',
         '0.87',
         '1.18',
@@ -332,6 +352,7 @@ const pump__intake = {
 
 const intake__protector = {
     ps: [
+        '',
         '338/375 ',
         '338/375 (FS) ',
         '387',
@@ -356,6 +377,7 @@ const intake__protector = {
         '675/738 (FS) '
     ],
     ps2: [
+        '',
         '375',
         '375/325/375 ',
         '387',
@@ -389,23 +411,24 @@ const intake__protector = {
         '738'
     ],
     sd: [
+        '',
         '0.68',
         '0.87',
-        '',
         '1.18'
     ],
     sd2: [
+        '',
         '0.87',
         '0.75',
         '1.18',
         '1',
-        '',
         '1.5'
     ]
 }
 
 const protector__protector = {
     ps: [
+        '',
         '325/375 ',
         '375',
         '387/375 ',
@@ -419,6 +442,7 @@ const protector__protector = {
         '950'
     ],
     ps2: [
+        '',
         '325/375 ',
         '375',
         '387/375 ',
@@ -434,6 +458,7 @@ const protector__protector = {
         '950/738 '
     ],
     sd: [
+        '',
         '0.75',
         '0.87',
         '1',
@@ -442,6 +467,7 @@ const protector__protector = {
         '2'
     ],
     sd2: [
+        '',
         '0.75',
         '0.87',
         '1',
@@ -453,6 +479,7 @@ const protector__protector = {
 
 const protector__motor = {
     ps: [
+        '',
         '325/375 ',
         '387/456 ',
         '387/375 ',
@@ -468,6 +495,7 @@ const protector__motor = {
         '950/738 '
     ],
     ps2: [
+        '',
         '375',
         '456 Dominator ',
         '540 Adapter to Motor ',
@@ -487,6 +515,7 @@ const protector__motor = {
         '738 Dominator '
     ],
     sd: [
+        '',
         '0.75',
         '0.87',
         '1.18',
@@ -497,6 +526,7 @@ const protector__motor = {
         '2.00 inv'
     ],
     sd2: [
+        '',
         '0.87',
         '1.12   inv.',
         '1.18',
@@ -512,6 +542,7 @@ const protector__motor = {
 
 const motor__motor = {
     ps: [
+        '',
         '375',
         '456',
         '456 Dominator UT ',
@@ -520,6 +551,7 @@ const motor__motor = {
         '738 Dominator UT '
     ],
     ps2: [
+        '',
         '375',
         '456',
         '456 Dominator LT ',
@@ -528,6 +560,7 @@ const motor__motor = {
         '738 Dominator LT '
     ],
     sd: [
+        '',
         '0.68',
         '0.75',
         '1',
@@ -539,6 +572,7 @@ const motor__motor = {
         '2.00 inv'
     ],
     sd2: [
+        '',
         '0.68',
         '0.75',
         '1',
@@ -553,23 +587,27 @@ const motor__motor = {
 
 const maxProtector__maxProtector_promotor = {
     ps: [
+        '',
         '375/325/375 ',
         '387/387 ',
         '400',
         '540'
     ],
     ps2: [
+        '',
         '375/325/375 ',
         '387/456 ',
         '400/456 ',
         '540 ; 540/562 '
     ],
     sd: [
+        '',
         '0.75',
         '0.87',
         '1.18'
     ],
     sd2: [
+        '',
         '0.75',
         '0.87/ 1.12 inv ',
         '0.87',
@@ -579,23 +617,27 @@ const maxProtector__maxProtector_promotor = {
 
 const maxProtector__std_motor_dominator_max_motor = {
     ps: [
+        '',
         '375/325/375 ',
         '387/387 ',
         '400',
         '540'
     ],
     ps2: [
+        '',
         '375/325/375 ',
         '387/456 ',
         '400/456 ',
         '540 ; 540/562 '
     ],
     sd: [
+        '',
         '0.75',
         '0.87',
         '1.18'
     ],
     sd2: [
+        '',
         '0.75',
         '0.87/ 1.12 inv  ',
         '0.87',
@@ -605,21 +647,25 @@ const maxProtector__std_motor_dominator_max_motor = {
 
 const maxUT_motor_promotor__maxCT_LT_motor = {
     ps: [
+        '',
         '387/456 ',
         '456',
         '562'
     ],
     ps2: [
+        '',
         '456',
         '562'
     ],
     sd: [
+        '',
         '0.87/ 1.12 inv ',
         '1.12 inv ',
         '1.37 inv',
         '1.37 inv '
     ],
     sd2: [
+        '',
         '1.12 inv ',
         '1.37 inv '
     ]
@@ -627,6 +673,7 @@ const maxUT_motor_promotor__maxCT_LT_motor = {
 
 const mgh_agh_intake_pump_LT__Max_prot_promotor = {
     ps: [
+        '',
         '338/338 ',
         '387/387 ',
         '400/400 ',
@@ -653,6 +700,7 @@ const mgh_agh_intake_pump_LT__Max_prot_promotor = {
         '1125/738 '
     ],
     ps2: [
+        '',
         '375/325/375 ',
         '387/387 ',
         '387/456 ',
@@ -662,6 +710,7 @@ const mgh_agh_intake_pump_LT__Max_prot_promotor = {
         '540/562 '
     ],
     sd: [
+        '',
         '0.68',
         '0.87',
         '1',
@@ -673,9 +722,129 @@ const mgh_agh_intake_pump_LT__Max_prot_promotor = {
         '1.62'
     ],
     sd2: [
+        '',
         '0.75',
         '0.87',
         '0.87/1.18 ',
         '1.18'
+    ]
+}
+
+const type = {
+    u_maximus:[
+        '',
+        'AGH LT (FS) Ext Hd ',
+        'AGH LT Ext Hd ',
+        'AGH LT (FS) ',
+        'AGH LT ',
+        'Intake ',
+        'Intake (FS) ',
+        'Intake Ext Hd ',
+        'Intake (FS) Ext Hd ',
+        'Intake Ext Hd (FS) ',
+        'Gas Separator ',
+        'Gas Separator (FS) ',
+        'Gas Separator Ext Hd ',
+        'Gas Separator Ext Hd (FS) ',
+        'MGH LT Ext Hd ',
+        'MGH LT ',
+        'Pump LT Ext Hd ',
+        'Pump LT (FS) Ext Hd ',
+        'Pump LT ',
+        'Pump LT (FS) ',
+        'Pump S ',
+        'Pump S/LT ',
+        'Maximus Protector (FS) MaxJoint ',
+        'Maximus Protector UT (FS) MaxJoint ',
+        'Maximus Protector S/LT (FS) MaxJoint ',
+        'Maximus Protector S (FS) MaxJoint ',
+        'ProMotor UT ',
+        'Maximus Motor UT ',
+        'Maximus Motor CT '
+    ],
+    val_u_maximus:[
+        '',
+        'agh_lt_fs_ext_hd',
+        'agh_lt_ext_hd',
+        'agh_lt_fs',
+        'agh_lt',
+        'intake',
+        'intake_fs',
+        'intake_ext_hd',
+        'intake_fs_ext_hd',
+        'intake_fs_ext_hd_fs',
+        'mgh_lt_ext_hd',
+        'mgh_lt',
+        'pump_lt_ext_hd',
+        'pump_lt_ext_hd_fs',
+        'pump_lt',
+        'pump_lt_fs',
+        'pump_s',
+        'pump_s_lt',
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_slt_fs_maxj',
+        'max_pro_s_fs_maxj',
+        'promotor_ut',
+        'max_motor_ut',
+        'max_motor_ct'
+    ],
+    b_maximus:[
+        '',
+        'Maximus Protector (FS) MaxJoint ',
+        'Maximus Protector UT (FS) MaxJoint ',
+        'Maximus Protector S/LT (FS) MaxJoint ',
+        'Maximus ProMotor S & UT (FS) MaxJoint ',
+        'Maximus Motor S/UT ',
+        'Motor UT ',
+        'Motor S/UT ',
+        'Dominator Motor S/UT ',
+        'Motor LT Maximus ',
+        'Maximus Motor CT or LT',
+    ],
+    val_b_maximus:[
+        '',
+        'max_protector_fs_maxjoint',
+        'max_protector_ut_fs_maxjoint',
+        'max_protector_s_lt_fs_maxjoint',
+        'max_promotor_s_ut_fs_maxjoint',
+        'max_motor_sut',
+        'maotor_ut',
+        'motor_sut',
+        'dom_motor_sut',
+        'motor_lt_max',
+        'max_motor_ct_lt'
+    ],
+    u_non_maximus:[
+        '',
+        'Pump',
+        'AGH/MGH',
+        'Intake',
+        'Protector',
+        'Motor'
+    ],
+    val_u_non_maximus:[
+        '',
+        'u_pump',
+        'u_agh',
+        'u_intake',
+        'u_protector',
+        'u_motor'
+    ],
+    b_non_maximus:[
+        '',
+        'Pump',
+        'AGH/MGH',
+        'Intake',
+        'Protector',
+        'Motor'
+    ],
+    val_b_non_maximus:[
+        '',
+        'b_pump',
+        'b_agh',
+        'b_intake',
+        'b_protector',
+        'b_motor'
     ]
 }

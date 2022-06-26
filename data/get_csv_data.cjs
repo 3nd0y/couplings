@@ -73,9 +73,9 @@ fs.createReadStream(datafile)
   .on('data', (row) => {
   	results.push(row);
   }).on('end', () => {
-  	// console.log(results);
+  	// console.log(results[0].sname);
 
-
+/*
   	console.log("===PS===\n\[");
   	for(let n in results) {
   		flag=false;
@@ -127,6 +127,34 @@ fs.createReadStream(datafile)
 		}
 		if(!flag) {
 			console.log('\t\''+results[n].sd2+'\',');
+			z[n]=results[n];
+		}
+  	}
+  	console.log('\]');
+*/
+  	z=[];
+ 	console.log("\n===Sname===\n\[");
+	for(let n in results) {
+  		flag=false;
+  		for(let x in z){
+			if(z[x].sname==results[n].sname) flag=true;
+		}
+		if(!flag) {
+			console.log('\t\''+results[n].sname+'\',');
+			z[n]=results[n];
+		}
+  	}
+  	console.log('\]');
+
+  	z=[];
+  console.log("\n===Sname2===\n\[");
+	for(let n in results) {
+  		flag=false;
+  		for(let x in z){
+			if(z[x].sname2==results[n].sname2) flag=true;
+		}
+		if(!flag) {
+			console.log('\t\''+results[n].sname2+'\',');
 			z[n]=results[n];
 		}
   	}

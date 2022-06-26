@@ -30,6 +30,16 @@
                     </div> -->
                     <div class="row mt-4">
                         <div class="form mt-3 mb-3">
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maximus" value="maximus">
+                              <label class="form-check-label radio-label" for="inlineRadio1">Maximus</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="nonmaximus" value="nonmaximus" checked>
+                              <label class="form-check-label radio-label" for="inlineRadio2">Non-Maximus</label>
+                            </div>
+                        </div>
+                        <div class="form mt-3 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text mb-1" id="basic-addon1">String</span>
                                 <select id="esp_upper" class="form-select form-select-lg mb-1" onfocus="clear_form_upper()">
@@ -38,39 +48,14 @@
                                     <option value="u_agh">AGH/MGH</option>
                                     <option value="u_intake">Intake</option>
                                     <option value="u_protector">Protector</option>
-									<option value="u_maxProtector">Maximus Protector</option>
                                     <option value="u_motor">Motor</option>
+                                    <option value="u_maxProtector">Maximus Protector</option>
 									<option value="u_maxMotor">Maximus Motor</option>
                                 </select>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-text mb-1" id="basic-addon1">Type&nbsp;&nbsp;</span>
-                                <select id="series_upper" class="form-select form-select-lg mb-1"><!-- 
-                                    <option id="series_u_blank"></option>
-                                    <option value="338">338</option>
-                                    <option value="338 Ext Sft ">338 Ext Shaft</option>
-                                    <option value="338 Ext Sft (FS) ">338 Ext Shaft Fact Shim</option>
-                                    <option value="387">387</option>
-                                    <option value="387 (FS) ">387 Fact Shim</option>
-                                    <option value="387 Ext Sft ">387 Ext Shaft</option>
-                                    <option value="387 Ext Sft (FS) ">387 Ext Shaft Fact Shim</option>
-                                    <option value="400">400</option>
-                                    <option value="400 (FS) ">400 Fact Shim</option>
-                                    <option value="400 Ext Sft ">400 Ext Shaft</option>
-                                    <option value="400 Ext Sft (FS) ">400 Ext Shaft Fact Shim</option>
-                                    <option value="450">450</option>
-                                    <option value="538/540 ">538/540</option>
-                                    <option value="538/540 (FS) ">538/540 Fact Shim</option>
-                                    <option value="540">540</option>
-                                    <option value="540 (FS) ">540 Fact Shim</option>
-                                    <option value="562">562</option>
-                                    <option value="562 (FS) ">562 Fact Shim</option>
-                                    <option value="675">675</option>
-                                    <option value="675 (FS) ">675 Fact Shim</option>
-                                    <option value="725">725</option>
-                                    <option value="862">862</option>
-                                    <option value="950">950</option>
-                                    <option value="1000">1000</option> -->
+                                <select id="series_upper" class="form-select form-select-lg mb-1">
                                 </select>
                             </div>
                             <!-- <select id="type_upper">
@@ -106,27 +91,7 @@
                             </div>
                             <div class="input-group">
                                 <span class="input-group-text mb-1" id="basic-addon1">Type&nbsp;&nbsp;</span>
-                                <select id="series_bottom" class="form-select form-select-lg mb-1"><!-- 
-                                    <option id="series_u_blank"></option>
-                                    <option value="338">338</option>
-                                    <option value="338 Ext Hd ">338 Ext Head</option>
-                                    <option value="338 Ext Hd (FS) ">338 Ext Head Fact Shim</option>
-                                    <option value="387">387</option>
-                                    <option value="387 Ext Hd ">387 Ext Head</option>
-                                    <option value="387 Ext Hd (FS) ">387 Ext Head Fact Shim</option>
-                                    <option value="400">400</option>
-                                    <option value="400 Ext Hd ">400 Ext Head</option>
-                                    <option value="400 Ext Hd (FS) ">400 Ext Head Fact Shim</option>
-                                    <option value="450">450</option>
-                                    <option value="538/540">538/540</option>
-                                    <option value="540">540</option>
-                                    <option value="562">562</option>
-                                    <option value="675">675</option>
-                                    <option value="725">725</option>
-                                    <option value="862">862</option>
-                                    <option value="950">950</option>
-                                    <option value="1000">1000</option>
-                                    <option value="1000/738">1000/738</option> -->
+                                <select id="series_bottom" class="form-select form-select-lg mb-1">
                                 </select>
                             </div>
                             <!-- <select id="type_bottom">
@@ -207,11 +172,35 @@
             document.getElementById('result-coupling').innerHTML = event.data;
         });
 
-        // clear form
+        // clear series form
         clear_series_upper();
         clear_series_bottom();
+        clear_esp_upper_bottom();
     }
 
+    function clear_esp_upper_bottom() {
+        try {
+            const esp_upper_id = document.getElementById('esp_upper');
+            const esp_bottom_id = document.getElementById('esp_bottom')
+            while (esp_upper_id.hasChildNodes()){
+                esp_upper_id.removeChild(esp_upper_id.firstChild);
+            }
+            while (esp_bottom_id.hasChildNodes()){
+                esp_bottom_id.removeChild(esp_bottom_id.firstChild);
+            }
+            console.log('clear_esp_upper_bottom');
+        } catch (err) { console.log('Error: ' + err); }
+    }
+
+    function clear_esp_bottom() {
+        try {
+            const esp_bottom_id = document.getElementById('esp_bottom');
+            while (esp_bottom_id.hasChildNodes()){
+                esp_bottom_id.removeChild(esp_bottom_id.firstChild);
+            }
+            console.log('clear_esp_upper_bottom');
+        } catch (err) { console.log('Error: ' + err); }
+    }
     // delete shaft size element child
     function clear_series_upper() {
         try {
@@ -239,6 +228,24 @@
     }
 
     // add child series
+    function insert_series(a,b,c,d) {
+        clear_esp_upper_bottom();
+        var elem = document.getElementById('esp_upper');
+        var elem2= document.getElementById('esp_bottom');
+        for (i in a) {
+            option = document.createElement('option');
+            option.text = a[i];
+            option.value = c[i];
+            elem.add(option);
+        }
+        for (i in b) {
+            option = document.createElement('option');
+            option.text = b[i];
+            option.value = d[i];
+            elem2.add(option);
+        }
+    }
+
     function insert_opt_upper(a,b) {
         var elem = document.getElementById('series_upper');
         var elem2= document.getElementById('shft_upper');
@@ -274,8 +281,23 @@
 
     
     // Select tag onchange
+    function select_string_maximus(){
+        clear_esp_upper_bottom();
+        clear_series_bottom();
+        clear_series_upper();
+        insert_series(type.u_maximus,type.b_maximus,type.val_u_maximus,type.val_b_maximus);
+    }
+
+    function select_string_nonmaximus(){
+        clear_esp_upper_bottom();
+        clear_series_bottom();
+        clear_series_upper();
+        insert_series(type.u_non_maximus,type.b_non_maximus,type.val_u_non_maximus,type.val_b_non_maximus);
+    }
+
     function select_series_upper() {
         var series = document.getElementById('esp_upper');
+        document.getElementById('esp_bottom').selectedIndex = 0;
         console.log(series.value);
         clear_series_upper();
         clear_series_bottom();
@@ -312,7 +334,8 @@
         } else if (seriesu.value=='u_motor' && seriesb.value=='b_motor') {
             insert_opt_upper(motor__motor.ps,motor__motor.sd);
             insert_opt_bottom(motor__motor.ps2,motor__motor.sd2);
-        } else if (seriesu.value=='u_maxProtector' && seriesb.value=='b_maxProtector') {
+                                // Below for Maximus only
+        } /* else if (seriesu.value=='u_maxProtector' && seriesb.value=='b_maxProtector') {
             insert_opt_upper(maxProtector__maxProtector_promotor.ps,maxProtector__maxProtector_promotor.sd);
             insert_opt_bottom(maxProtector__maxProtector_promotor.ps2,maxProtector__maxProtector_promotor.sd2);
         } else if ((seriesu.value=='u_maxProtector' && seriesb.value=='b_maxProtector')||(seriesu.value=='u_maxProtector' && seriesb.value=='b_motor')) {
@@ -324,7 +347,10 @@
         } else if ((seriesu.value=='u_pump' && seriesb.value=='b_maxProtector')||(seriesu.value=='u_agh' && seriesb.value=='b_maxProtector')||(seriesu.value=='u_intake' && seriesb.value=='b_maxProtector')) {
             insert_opt_upper(mgh_agh_intake_pump_LT__Max_prot_promotor.ps,mgh_agh_intake_pump_LT__Max_prot_promotor.sd);
             insert_opt_bottom(mgh_agh_intake_pump_LT__Max_prot_promotor.ps2,mgh_agh_intake_pump_LT__Max_prot_promotor.sd2);
-        } 
+        } */else if(type.val_u_maximus.includes(seriesu.value) && (seriesb.value=='max_protector_fs_maxjoint' || seriesb.value=='max_protector_ut_fs_maxjoint' || seriesb.value=='max_protector_s_lt_fs_maxjoint')) {
+            insert_opt_upper(mgh_agh_intake_pump_LT__Max_prot_promotor.ps,mgh_agh_intake_pump_LT__Max_prot_promotor.sd);
+            insert_opt_bottom(mgh_agh_intake_pump_LT__Max_prot_promotor.ps2,mgh_agh_intake_pump_LT__Max_prot_promotor.sd2);
+        }
     }
 
     // Select tage onFocus
@@ -341,9 +367,13 @@
     // Select tag Event Listener 
     const su = document.getElementById('esp_upper');
     const sb = document.getElementById('esp_bottom');
+    const mx = document.getElementById('maximus');
+    const nmx= document.getElementById('nonmaximus');
 
     su.addEventListener('change', select_series_upper);
     sb.addEventListener('change', select_series_bottom);
+    mx.addEventListener('change', select_string_maximus);
+    nmx.addEventListener('change',select_string_nonmaximus);
     </script>
 </body>
 

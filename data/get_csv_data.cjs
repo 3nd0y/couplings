@@ -19,8 +19,8 @@ let datafile;
 // const cek="motor-motor";
 // const cek="maxProtector-maxProtector_promotor";
 // const cek="maxProtector-std_motor_dominator_max_motor";
-// const cek="maxUT_motor_promotor-maxCT_LT_motor";
-const cek="mgh_agh_intake_pump_LT-Max_prot_promotor";
+const cek="maxUT_motor_promotor-maxCT_LT_motor";
+// const cek="mgh_agh_intake_pump_LT-Max_prot_promotor";
 
 
 console.log('\n\n**'+cek+'**\n\n');
@@ -75,7 +75,7 @@ fs.createReadStream(datafile)
   }).on('end', () => {
   	// console.log(results[0].sname);
 
-/*
+
   	console.log("===PS===\n\[");
   	for(let n in results) {
   		flag=false;
@@ -131,7 +131,9 @@ fs.createReadStream(datafile)
 		}
   	}
   	console.log('\]');
-*/
+
+
+/////
   	z=[];
  	console.log("\n===Sname===\n\[");
 	for(let n in results) {

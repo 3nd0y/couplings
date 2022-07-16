@@ -14,7 +14,7 @@ const server = express()
   .get('/', function(req, res){
     res.sendFile(path.join(__dirname, 'www/index.html'))
   })
-  .get('/coupling', function(req, res){
+  .get(INDEX, function(req, res){
      res.sendFile(path.join(__dirname, 'www/coupling.html'))
    })
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
@@ -22,12 +22,182 @@ const server = express()
 
 const wss = new Server({ server });
 
+// Variable
+const type = {
+    u_maximus:[
+        '',
+        'AGH LT (FS) Ext Hd ',
+        'AGH LT Ext Hd ',
+        'AGH LT (FS) ',
+        'AGH LT ',
+        'Intake ',
+        'Intake (FS) ',
+        'Intake Ext Hd ',
+        'Intake (FS) Ext Hd ',
+        'Intake Ext Hd (FS) ',
+        'Gas Separator ',
+        'Gas Separator (FS) ',
+        'Gas Separator Ext Hd ',
+        'Gas Separator Ext Hd (FS) ',
+        'MGH LT Ext Hd ',
+        'MGH LT ',
+        'Pump LT Ext Hd ',
+        'Pump LT (FS) Ext Hd ',
+        'Pump LT ',
+        'Pump LT (FS) ',
+        'Pump S ',
+        'Pump S/LT ',
+        'Maximus Protector (FS) MaxJoint ',
+        'Maximus Protector UT (FS) MaxJoint ',
+        'Maximus Protector S/LT (FS) MaxJoint ',
+        'Maximus Protector S (FS) MaxJoint ',
+        'ProMotor UT ',
+        'Maximus Motor UT ',
+        'Maximus Motor CT '
+    ],
+    val_u_maximus:[
+        '',
+        'agh_lt_fs_ext_hd',
+        'agh_lt_ext_hd',
+        'agh_lt_fs',
+        'agh_lt',
+        'intake',
+        'intake_fs',
+        'intake_ext_hd',
+        'intake_fs_ext_hd',
+        'intake_fs_ext_hd_fs',
+        'gs ',
+        'gs_fs ',
+        'gs_ext_hd ',
+        'gs_ext_hd_fs ',
+        'mgh_lt_ext_hd',
+        'mgh_lt',
+        'pump_lt_ext_hd',
+        'pump_lt_ext_hd_fs',
+        'pump_lt',
+        'pump_lt_fs',
+        'pump_s',
+        'pump_s_lt',
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_slt_fs_maxj',
+        'max_pro_s_fs_maxj',
+        'promotor_ut',
+        'max_motor_ut',
+        'max_motor_ct'
+    ],
+    b_maximus:[
+        '',
+        'Maximus Protector (FS) MaxJoint ',
+        'Maximus Protector UT (FS) MaxJoint ',
+        'Maximus Protector S/LT (FS) MaxJoint ',
+        'Maximus ProMotor S & UT (FS) MaxJoint ',
+        'Maximus Motor S/UT ',
+        'Motor UT ',
+        'Motor S/UT ',
+        'Dominator Motor S/UT ',
+        'Motor LT Maximus ',
+        'Maximus Motor CT or LT',
+    ],
+    val_b_maximus:[
+        '',
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_s_lt_fs_maxj',
+        'max_promotor_s_ut_fs_maxj',
+        'max_motor_s_ut',
+        'motor_ut',
+        'motor_s_ut',
+        'dom_motor_sut',
+        'motor_lt_max',
+        'max_motor_ct_lt'
+    ]
+}
+
+const pump_agh_intake_tomaxprot={
+	u:[
+    'agh_lt_fs_ext_hd',
+    'agh_lt_ext_hd',
+    'agh_lt_fs',
+    'agh_lt',
+    'intake',
+    'intake_fs',
+    'intake_ext_hd',
+    'intake_fs_ext_hd',
+    'intake_fs_ext_hd_fs',
+    'gs ',
+    'gs_fs ',
+    'gs_ext_hd ',
+    'gs_ext_hd_fs ',
+    'mgh_lt_ext_hd',
+    'mgh_lt',
+    'pump_lt_ext_hd',
+    'pump_lt_ext_hd_fs',
+    'pump_lt',
+    'pump_lt_fs',
+    'pump_s',
+    'pump_s_lt'
+	],
+	b:[
+		'max_pro_fs_maxj',
+    'max_pro_ut_fs_maxj',
+    'max_pro_s_lt_fs_maxj',
+    'max_pro_s_fs_maxj',
+    'max_promotor_s_ut_fs_maxj'
+	]
+}
+
+
+const maxprotector_tomaxprot={
+    u:[
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj'
+    ],
+    b:[
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_s_lt_fs_maxj',
+    ]
+}
+
+
+const maxprotector_tomaxmotdom={
+    u:[
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_s_lt_fs_maxj',
+        'max_pro_s_fs_maxj'
+    ],
+    b:[
+        'motor_ut',
+        'motor_s_ut',
+        'dom_motor_sut',
+    ]
+}
+
+const maxmotr_tomaxmot={
+    u:[
+    	'promotor_ut',
+        'max_motor_ut',
+        'max_motor_ct'
+    ],
+    b:[
+        'motor_lt_max',
+        'max_motor_ct_lt'
+    ]
+}
+
 wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
     var dataj = JSON.parse(JSON.parse(data));
     var esp_type;
     var table_list;
-	// console.log(dataj);
+    var status_filter=true;
+    var maximus=dataj.maxornot;
+    console.log('===============');
+	console.log(dataj);
+	
+	// console.log(pump_agh_intake_tomaxprot.u.includes(dataj.esp_upper),pump_agh_intake_tomaxprot.b.includes(dataj.esp_bottom));
 		if (dataj.esp_upper == 'u_pump' && dataj.esp_bottom == 'b_pump') {
 			console.log('PUMP to PUMP');
 			esp_type='data/pump-pump.csv';
@@ -67,32 +237,67 @@ wss.on('connection', function connection(ws) {
 					dataj.esp_upper == 'u_agh' ||
 					dataj.esp_upper == 'u_intake') && dataj.esp_bottom == 'b_maxProtector') {
 			console.log('AGH/INTAKE/PUMP LT to PROTECTOR MAXIMUS'); // This will pass for this momment
-		} else if (dataj.esp_upper == 'u_maxProtector' && dataj.esp_bottom == 'b_maxProtector') {
-			console.log('MAXIMUS PROTECTOR to MAXIMUS PROTECTOR');
+		} else if (pump_agh_intake_tomaxprot.u.includes(dataj.esp_upper)&&pump_agh_intake_tomaxprot.b.includes(dataj.esp_bottom)){
+			console.log('AGH/INTAKE/PUMP LT to PROTECTOR MAXIMUS');
+			esp_type='data/mgh_agh_intake_pump_LT-Max_prot_promotor.csv';
+			table_list=['sname','ps','sd','sname2','ps2','sd2','cpl','cpl_inc625','cpl_inc718','sa','csfa','rfa','osize','oaflas','ohsn','css','cslw','ms','mlw','sw','trq'];
+		} else if(maxprotector_tomaxprot.u.includes(dataj.esp_upper)&&pump_agh_intake_tomaxprot.b.includes(dataj.esp_bottom)) {
+			console.log('PROTECTOR MAXIMUS TO PROTECTOR MAXIMUS PROMOTOR');
 			esp_type='data/maxProtector-maxProtector_promotor.csv';
 			table_list=['sname','ps','sd','sname2','ps2','sd2','cpl','cpl_inc625','cpl_inc718','sa','csfa','rfa','osize','oaflas','ohsn','css','cslw','ms','mlw','sw','trq'];
-		} else if (dataj.esp_upper == 'u_maxProtector' && (dataj.esp_bottom == 'b_motor' || dataj.esp_bottom == 'b_maxMotor')) {
-			console.log('MAXIMUS PROTECTOR to MOTOR/MAXIMUS MOTOR');
-			esp_type='data/maxProtector-std_motor_dominator_max_motor.csv'
-		} else if (dataj.esp_upper == 'u_maxMotor' && dataj.esp_bottom == 'b_maxMotor') {
-			console.log('MAXIMUS MOTOR to MAXIMUS MOTOR');
-			esp_type='maxUT_motor_promotor-maxCT_LT_motor.csv'
+		} else if(maxprotector_tomaxmotdom.u.includes(dataj.esp_upper)&&maxprotector_tomaxmotdom.b.includes(dataj.esp_bottom)) {
+			console.log('PROTECTOR MAXIMUS TO MOTOR DOMINATOR MAXIMUS PROMOTOR');
+			esp_type='data/maxProtector-std_motor_dominator_max_motor.csv';
+			table_list=['sname','ps','sd','sname2','ps2','sd2','cpl','cpl_inc625','cpl_inc718','sa','csfa','rfa','osize','oaflas','ohsn','css','cslw','ms','mlw','sw','trq'];
+		} else if(maxmotr_tomaxmot.u.includes(dataj.esp_upper)&&maxmotr_tomaxmot.b.includes(dataj.esp_bottom)) {
+			console.log('MOTOR MAXIMUS TO DOMINATOR MAXIMUS PROMOTOR');
+			esp_type='data/maxUT_motor_promotor-maxCT_LT_motor.csv';
 			table_list=['sname','ps','sd','sname2','ps2','sd2','cpl','cpl_inc625','sa','csfa','rfa','osize','oaflas','ohsn','css','cslw','ms','mlw','sw','trq'];
-		} else {
-			console.log('Not Recognized');
 		}
-		fs.createReadStream(esp_type)
+		else {
+			console.log('mismatch error');
+			console.log(maxmotr_tomaxmot.u);
+			console.log(dataj.esp_upper);
+			console.log(maxmotr_tomaxmot.b);
+			console.log(dataj.esp_bottom);
+			status_filter=false;
+		}
+
+		console.log('esp_type: '+esp_type,'\ntable_list: '+table_list)+'\n\n';
+		if(status_filter){
+			fs.createReadStream(esp_type)
 		  .pipe(csv(table_list))
 		  .on('data', (row) => {
+		  	// console.log(row);
 			// console.log(row.ps,dataj.series_upper,':',row.sd,dataj.shft_upper,':','\"'+row.ps2+'\"','\"'+dataj.series_bottom+'\"',':','\"'+row.sd2+'\"','\"'+dataj.shft_bottom+'\"');
 			// console.log(row.ps==dataj.series_upper,row.sd==dataj.shft_upper,row.ps2==dataj.series_bottom,row.sd2==dataj.shft_bottom)
+			
+			if(!maximus){
 				if(row.ps==dataj.series_upper && row.sd==dataj.shft_upper && row.ps2==dataj.series_bottom && row.sd2==dataj.shft_bottom) {
 				  ws.send(row.cpl); 
+				  // var results=[];
+				  // results.push(row);
+				  // console.log('Non Max send:\n'+JSON.stringify(results));
 				}
+			} else {
+				for (var a in type.val_u_maximus) {
+					if(dataj.esp_upper==type.val_u_maximus[a]) dataj.esp_upper = type.u_maximus[a];
+					if(dataj.esp_bottom==type.val_b_maximus[a]) dataj.esp_bottom = type.b_maximus[a];
+				}
+				if(row.ps==dataj.series_upper && row.sd==dataj.shft_upper && row.ps2==dataj.series_bottom && row.sd2==dataj.shft_bottom && row.sname==dataj.esp_upper && row.sname2==dataj.esp_bottom) {
+				  ws.send(row.cpl); 
+				  // var results=[];
+				  // results.push(row);
+				  // console.log('Max send:\n'+JSON.stringify(results));
+
+				}
+			}
 		  })
 		  .on('end', () => {
 			// console.log();
-		  });  
+		  });
+		}
+		  
 	});
 
 });
@@ -127,3 +332,6 @@ mlw = monel lockwasher
 sw = wrench size
 trq = torques bolt setting
 **************/
+
+
+

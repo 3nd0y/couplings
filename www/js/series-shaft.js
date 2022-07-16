@@ -612,6 +612,15 @@ const maxProtector__maxProtector_promotor = {
         '0.87/ 1.12 inv ',
         '0.87',
         '1.18'
+    ],
+    sname: [
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj'
+    ],
+    sname2: [
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_s_lt_fs_maxj'
     ]
 }
 
@@ -642,6 +651,18 @@ const maxProtector__std_motor_dominator_max_motor = {
         '0.87/ 1.12 inv  ',
         '0.87',
         '1.18'
+    ],
+    sname: [
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_slt_fs_maxj',
+        'max_pro_s_fs_maxj'
+    ],
+    sname2: [
+        'max_motor_s_ut',
+        'motor_ut',
+        'motor_s_ut',
+        'dom_motor_sut'
     ]
 }
 
@@ -668,6 +689,15 @@ const maxUT_motor_promotor__maxCT_LT_motor = {
         '',
         '1.12 inv ',
         '1.37 inv '
+    ],
+    sname: [
+        'promotor_ut',
+        'max_motor_ut',
+        'max_motor_ct'
+    ],
+    sname2: [
+        'motor_lt_max',
+        'max_motor_ct_lt'
     ]
 }
 
@@ -727,6 +757,35 @@ const mgh_agh_intake_pump_LT__Max_prot_promotor = {
         '0.87',
         '0.87/1.18 ',
         '1.18'
+    ],
+    sname: [
+        'agh_lt_fs_ext_hd',
+        'agh_lt_ext_hd',
+        'agh_lt_fs',
+        'agh_lt',
+        'intake',
+        'intake_fs',
+        'intake_ext_hd',
+        'intake_fs_ext_hd',
+        'intake_fs_ext_hd_fs',
+        'gs ',
+        'gs_fs ',
+        'gs_ext_hd ',
+        'gs_ext_hd_fs ',
+        'mgh_lt_ext_hd',
+        'mgh_lt',
+        'pump_lt_ext_hd',
+        'pump_lt_ext_hd_fs',
+        'pump_lt',
+        'pump_lt_fs',
+        'pump_s',
+        'pump_s_lt'
+    ],
+    sname2: [
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_s_lt_fs_maxj',
+        'max_promotor_s_ut_fs_maxj'
     ]
 }
 
@@ -758,7 +817,7 @@ const type = {
         'Maximus Protector UT (FS) MaxJoint ',
         'Maximus Protector S/LT (FS) MaxJoint ',
         'Maximus Protector S (FS) MaxJoint ',
-        'ProMotor UT ',
+        'Maximus ProMotor UT ',
         'Maximus Motor UT ',
         'Maximus Motor CT '
     ],
@@ -773,6 +832,10 @@ const type = {
         'intake_ext_hd',
         'intake_fs_ext_hd',
         'intake_fs_ext_hd_fs',
+        'gs ',
+        'gs_fs ',
+        'gs_ext_hd ',
+        'gs_ext_hd_fs ',
         'mgh_lt_ext_hd',
         'mgh_lt',
         'pump_lt_ext_hd',
@@ -799,18 +862,18 @@ const type = {
         'Motor UT ',
         'Motor S/UT ',
         'Dominator Motor S/UT ',
-        'Motor LT Maximus ',
-        'Maximus Motor CT or LT',
+        'Maximus Motor LT ',
+        'Maximus Motor CT or LT'
     ],
     val_b_maximus:[
         '',
-        'max_protector_fs_maxjoint',
-        'max_protector_ut_fs_maxjoint',
-        'max_protector_s_lt_fs_maxjoint',
-        'max_promotor_s_ut_fs_maxjoint',
-        'max_motor_sut',
-        'maotor_ut',
-        'motor_sut',
+        'max_pro_fs_maxj',
+        'max_pro_ut_fs_maxj',
+        'max_pro_s_lt_fs_maxj',
+        'max_promotor_s_ut_fs_maxj',
+        'max_motor_s_ut',
+        'motor_ut',
+        'motor_s_ut',
         'dom_motor_sut',
         'motor_lt_max',
         'max_motor_ct_lt'

@@ -52,7 +52,8 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'www/index.html'));
 });
 app.get('/coupling', function(req, res){
-  res.sendFile(path.join(__dirname, 'www/coupling-finder.html'));
+  // res.sendFile(path.join(__dirname, 'www/coupling-finder.html'));
+  res.sendFile(path.join(__dirname, 'www/coupling.html'));
 });
 
 function find_cpl(ps, sd, ps2, sd2) {
@@ -82,6 +83,8 @@ wss.on('connection', function connection(ws) {
         // console.log(row.ps==dataj.series_upper,row.sd==dataj.shft_upper,row.ps2==dataj.series_bottom,row.sd2==dataj.shft_bottom)
         if(row.ps==dataj.series_upper && row.sd==dataj.shft_upper && row.ps2==dataj.series_bottom && row.sd2==dataj.shft_bottom) {
           ws.send(row.cpl); 
+        } else {
+          ws.send('Wrong Choice');
         }
       })
       .on('end', () => {

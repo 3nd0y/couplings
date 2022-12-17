@@ -1,18 +1,14 @@
 {
   "name": "SLB-Report",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "type": "module",
   "engines": {
     "node":"17.x"
   },
   "description": "Web apps to check coupling ESP",
   "main": "index.js",
   "scripts": {
-    "start":"node index.cjs",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"node index.cjs"
+    "start":"node index.cjs"
   },
   "keywords": [],
   "author": "3nd0y",

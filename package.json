@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
-    "node":"17.x"
+    "node": "17.x"
   },
   "description": "Web apps to check coupling ESP",
-  "main": "index.js",
   "scripts": {
-    "start":"node index.cjs"
+    "start": "node index.cjs"
   },
   "keywords": [],
   "author": "3nd0y",
@@ -16,7 +15,8 @@
   "dependencies": {
     "csv-parser": "3.0.0",
     "express": "4.17.2",
-    "ws": "^8.4.2"
+    "ws": "^8.4.2",
+    "yarn": "^1.22.19"
   },
   "repository": {
     "type": "git",

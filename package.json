@@ -1,7 +1,7 @@
 {
   "name": "SLB-Report",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.cjs",
   "engines": {
     "node": "17.x"
   },

@@ -9,6 +9,7 @@
     <script src="js/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/coupling.css">
+    <link rel="stylesheet" type="text/css" href="css/loading.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="/imgs/fav/favicon.ico">
 </head>
@@ -133,7 +134,9 @@
                     <div class="modal-body">
                         <div class="mt-2">
                             <span>Result</span>
-                            <textarea class="form-control mb-3" id="result-coupling" rows="4"></textarea>
+                            <div id="loading">
+                                <div class="lds-facebook"><div></div><div></div><div></div></div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -149,7 +152,7 @@
         const socket = new WebSocket(location.origin.replace(/^http/, 'ws'));
         var jsonws = {};
         // clear Element
-        document.getElementById('result-coupling').innerHTML = '';
+        // document.getElementById('result-coupling').innerHTML = '';
 
         jsonws.esp_upper = document.getElementById('esp_upper').value;
         jsonws.series_upper = document.getElementById('series_upper').value;
@@ -165,13 +168,14 @@
         // Connection opened
         socket.addEventListener('open', function(event) {
             socket.send(sendjson);
-			console.log(sendjson);
+			// console.log(sendjson);
         });
 
         // Listen for messages
         socket.addEventListener('message', function(event) {
             console.log('Message from server ', event.data);
-            document.getElementById('result-coupling').innerHTML = event.data;
+            // document.getElementById('result-coupling').innerHTML = event.data;
+            document.getElementById('loading').innerHTML='<textarea class="form-control mb-3" id="result-coupling" rows="4">'+event.data+'</textarea>'
         });
 
         // clear series form
@@ -385,6 +389,12 @@
     sb.addEventListener('change', select_series_bottom);
     mx.addEventListener('change', select_string_maximus);
     nmx.addEventListener('change',select_string_nonmaximus);
+
+    // Modal Closed
+    var myModalEl = document.getElementById('exampleModal')
+    myModalEl.addEventListener('hidden.bs.modal', function (event) {
+      document.getElementById('loading').innerHTML='<div class="lds-facebook"><div></div><div></div><div></div></div>';
+    })
     </script>
 </body>
 

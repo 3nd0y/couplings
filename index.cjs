@@ -23,6 +23,7 @@ const server = express()
 const wss = new Server({ server });
 
 // Variable
+var result = [];
 const type = {
     u_maximus:[
         '',
@@ -264,37 +265,44 @@ wss.on('connection', function connection(ws) {
 		}
 
 		console.log('esp_type: '+esp_type,'\ntable_list: '+table_list)+'\n\n';
+        var counter=0;
 		if(status_filter){
 			fs.createReadStream(esp_type)
-		  .pipe(csv(table_list))
-		  .on('data', (row) => {
+            .pipe(csv(table_list))
+            .on('data', (row) => {
+                counter++;
 		  	// console.log(row);
 			// console.log(row.ps,dataj.series_upper,':',row.sd,dataj.shft_upper,':','\"'+row.ps2+'\"','\"'+dataj.series_bottom+'\"',':','\"'+row.sd2+'\"','\"'+dataj.shft_bottom+'\"');
 			// console.log(row.ps==dataj.series_upper,row.sd==dataj.shft_upper,row.ps2==dataj.series_bottom,row.sd2==dataj.shft_bottom)
 			
 			if(!maximus){
 				if(row.ps==dataj.series_upper && row.sd==dataj.shft_upper && row.ps2==dataj.series_bottom && row.sd2==dataj.shft_bottom) {
-				  ws.send(row.cpl); 
-				  // var results=[];
-				  // results.push(row);
-				  // console.log('Non Max send:\n'+JSON.stringify(results));
+                    result.push(row.cpl);
 				}
 			} else {
 				for (var a in type.val_u_maximus) {
 					if(dataj.esp_upper==type.val_u_maximus[a]) dataj.esp_upper = type.u_maximus[a];
 					if(dataj.esp_bottom==type.val_b_maximus[a]) dataj.esp_bottom = type.b_maximus[a];
 				}
+                // console.log('['+counter+']',row.ps==dataj.series_upper ,':', row.sd==dataj.shft_upper ,':', row.ps2==dataj.series_bottom ,':', row.sd2==dataj.shft_bottom ,':', row.sname==dataj.esp_upper ,':', row.sname2==dataj.esp_bottom);
 				if(row.ps==dataj.series_upper && row.sd==dataj.shft_upper && row.ps2==dataj.series_bottom && row.sd2==dataj.shft_bottom && row.sname==dataj.esp_upper && row.sname2==dataj.esp_bottom) {
-				  ws.send(row.cpl); 
+                  result.push(row.cpl);
 				  // var results=[];
 				  // results.push(row);
-				  // console.log('Max send:\n'+JSON.stringify(results));
+				  // console.log('Max send:\n'+JSON.stringify(result));
 
-				}
-			}
+				} else {
+                    // ws.send('Can\'t find Couplings, wrong connection ESP');
+                }
+			} 
 		  })
 		  .on('end', () => {
-			// console.log();
+            let logic = false;
+                if(!result.length) ws.send('No Coupling Matched');
+                else ws.send(result[0]);
+                console.log('send data:' + result[0]);
+                result = [];
+            counter=0;
 		  });
 		}
 		  
